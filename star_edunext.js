@@ -30,7 +30,7 @@ if (gradeButton) {
               if (count >= 5) {
                   clearInterval(intervalId);
               }
-          }, 100); // 100ms giữa mỗi lần click
+          }, 400); // 100ms giữa mỗi lần click
       } else {
           console.log("Không tìm thấy button có span chứa 'Grade', đang tìm lại...");
       }
@@ -47,7 +47,7 @@ if (gradeButton) {
           clearInterval(searchInterval);
           findAndClickGradeButton();
       }
-  }, 100); // 100ms giữa mỗi lần tìm
+  }, 400); // 100ms giữa mỗi lần tìm
 } else {
   console.log("Không tìm thấy button có span chứa 'Grade on groupmates'.");
 }
