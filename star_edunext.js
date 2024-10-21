@@ -39,9 +39,6 @@ if (gradeButton) {
               count++;
 
               // Dừng lại sau 5 lần click (hoặc điều chỉnh theo nhu cầu)
-              if (count >= 5) {
-                  clearInterval(clickGradeInterval);
-              }
           }, 400); // 100ms giữa mỗi lần click
       }
   }, 1000); // 1000ms giữa mỗi lần tìm
