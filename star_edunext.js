@@ -7,36 +7,24 @@ const gradeButton = [...document.querySelectorAll('button')].find(btn => {
 if (gradeButton) {
   gradeButton.click();
 
-  // Ấn vào tất cả các input có value "5"
-  const inputs = document.querySelectorAll('input[value="5"]');
-  inputs.forEach(input => {
-      input.click();
-  });
-
-  // Hàm tìm button chứa "Grade"
-  const findAndClickGradeButton = () => {
-      const finalButton = [...document.querySelectorAll('button')].find(btn => {
-          const span = btn.querySelector('span');
-          return span && span.textContent.trim() === "Grade";
+  // Hàm ấn vào tất cả các input có value "5"
+  const clickInputs = () => {
+      const inputs = document.querySelectorAll('input[value="5"]');
+      inputs.forEach(input => {
+          input.click();
       });
-
-      if (finalButton) {
-          let count = 0;
-          const intervalId = setInterval(() => {
-              finalButton.click();
-              count++;
-
-              // Dừng lại sau 5 lần ấn (hoặc điều chỉnh số lần theo nhu cầu)
-              if (count >= 5) {
-                  clearInterval(intervalId);
-              }
-          }, 1000); // 100ms giữa mỗi lần click
-      } else {
-          console.log("Không tìm thấy button có span chứa 'Grade', đang tìm lại...");
-      }
+      console.log("Đã ấn vào tất cả các input có value '5'.");
   };
 
-  // Tìm button chứa "Grade" với khoảng cách 100ms
+  // Click vào input có value "5" lần đầu
+  clickInputs();
+
+  // Lặp lại việc click vào các input có value "5" với khoảng delay 1000ms
+  const inputInterval = setInterval(() => {
+      clickInputs();
+  }, 600); // 1000ms giữa mỗi lần click
+
+  // Tìm lại button chứa "Grade" sau mỗi 1000ms
   const searchInterval = setInterval(() => {
       const finalButton = [...document.querySelectorAll('button')].find(btn => {
           const span = btn.querySelector('span');
@@ -45,9 +33,18 @@ if (gradeButton) {
 
       if (finalButton) {
           clearInterval(searchInterval);
-          findAndClickGradeButton();
+          let count = 0;
+          const clickGradeInterval = setInterval(() => {
+              finalButton.click();
+              count++;
+
+              // Dừng lại sau 5 lần click (hoặc điều chỉnh theo nhu cầu)
+              if (count >= 5) {
+                  clearInterval(clickGradeInterval);
+              }
+          }, 400); // 100ms giữa mỗi lần click
       }
-  }, 1000); // 100ms giữa mỗi lần tìm
+  }, 1000); // 1000ms giữa mỗi lần tìm
 } else {
   console.log("Không tìm thấy button có span chứa 'Grade on groupmates'.");
 }
